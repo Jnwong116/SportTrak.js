@@ -1,0 +1,97 @@
+* {
+    border: 0;
+    padding: 0;
+    margin: 0;
+}
+
+.court {
+    display: flex;
+    box-pack: center;
+    justify-content: center;
+    box-align: center;
+    align-items: center;
+}
+.court > main {
+    box-sizing: border-box;
+    border-width: 3vw 5vw;
+    border-style: solid;
+    border-color: brown;
+    display: flex;
+    box-align: center;
+    align-items: center;
+}
+.court > main > div.half-court {
+    width: 36vw;
+    height: 44vw;
+    box-sizing: border-box;
+    background: grey;
+    border-width: 0.6vw 0.3vw 0.6vw 0.6vw;
+    border-style: solid;
+    border-color: white;
+    overflow: hidden;
+    display: inline-flex;
+    box-align: center;
+    align-items: center;
+    box-pack: justify;
+    justify-content: space-between;
+}
+.court > main > div.half-court:after {
+    content: "";
+    height: 10vw;
+    width: 5vw;
+    border-radius: 10vw 0 0 10vw;
+    border-width: 0.6vw 0 0.6vw 0.6vw;
+    border-style: solid;
+    border-color: white;
+}
+.court > main > div.half-court:nth-of-type(2) {
+    transform: rotate(180deg);
+}
+.court > main > div.half-court > div.three-pointer {
+    box-sizing: border-box;
+    position: relative;
+    right: 19.5%;
+    border-width: 0.6vw 0.6vw 0.6vw 0;
+    border-style: solid;
+    border-color: white;
+    border-bottom-right-radius: 55%;
+    border-top-right-radius: 55%;
+    height: 80%;
+    width: 80%;
+    background: green;
+    background: green;
+    display: -webkit-box;
+    display: -moz-box;
+    display: box;
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: -ms-flexbox;
+    display: flex;
+    box-align: center;
+    align-items: center;
+}
+.court > main > div.half-court > div.three-pointer > div.free-throw {
+    box-sizing: border-box;
+    height: 11vw;
+    width: 23vw;
+    border: 0.6vw solid white;
+    box-sizing: border-box;
+    position: relative;
+    display: flex;
+    box-align: center;
+    align-items: center;
+    box-pack: end;
+    justify-content: flex-end;
+}
+.court > main > div.half-court > div.three-pointer > div.free-throw > div.key {
+    box-sizing: border-box;
+    transform: rotate(45deg);
+    margin-right: -5.3vw;
+    height: 11vw;
+    width: 11vw;
+    border-radius: 50%;
+    border-width: 0.6vw;
+    border-style: solid solid dashed dashed;
+    border-color: white;
+    position: relative;
+}
