@@ -6,12 +6,22 @@
 
         <title>Example of SportTrak</title>
 
+        <link rel="stylesheet" type="text/css" href="examples.css">
         <link rel="stylesheet" type="text/css" href="sportTrak_styles.css">
         <script defer type="text/javascript" src="./js/sportTrak.js"></script>
         <script defer type="text/javascript" src="./js/examples.js"></script>
 
     </head>
     <body>
-        
+        <h1>Welcome to 309 Sports</h1>
+        <div class="sidebar">
+            <button onclick="showLineup()">Show Lineup</button> <br />
+            <button onclick="showStats()">Game Stats</button>
+        </div>
+        <div class="highlights">
+            <h2>Game Highlights</h2>
+            <br />
+            <button onclick="showHighlight(0)">RJ Three to Tie Game</button>
+        </div>
     </body>
 </html>

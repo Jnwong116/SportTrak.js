@@ -1,0 +1,14 @@
+button {
+    background-color: rgb(150, 141, 141);
+    border: 1px solid black;
+    padding: 10px;
+}
+
+.sidebar {
+    position: relative;
+}
+
+.highlights {
+    position: relative;
+    left: 50%;
+}

@@ -4,12 +4,16 @@
     margin: 0;
 }
 
+/*
+------------------- Basketball court styles
+*/
+
 .court {
     display: flex;
     box-pack: center;
-    justify-content: center;
     box-align: center;
     align-items: center;
+    font-family: Arial, Helvetica, sans-serif;
 }
 .court > main {
     box-sizing: border-box;
@@ -24,7 +28,7 @@
     width: 36vw;
     height: 44vw;
     box-sizing: border-box;
-    background: grey;
+    background: rgb(255, 166, 0);
     border-width: 0.6vw 0.3vw 0.6vw 0.6vw;
     border-style: solid;
     border-color: white;
@@ -58,14 +62,7 @@
     border-top-right-radius: 55%;
     height: 80%;
     width: 80%;
-    background: green;
-    background: green;
-    display: -webkit-box;
-    display: -moz-box;
-    display: box;
-    display: -webkit-flex;
-    display: -moz-flex;
-    display: -ms-flexbox;
+    background: rgb(173, 118, 15);
     display: flex;
     box-align: center;
     align-items: center;
@@ -94,4 +91,239 @@
     border-style: solid solid dashed dashed;
     border-color: white;
     position: relative;
+}
+
+/*
+------------------- Player and team lineup styles
+*/
+.player {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    text-align: center;
+}
+
+.pg.team1 {
+    position: absolute;
+    left: 28%;
+    z-index: 100;
+    transition: all 1s linear;
+}
+
+.sg.team1 {
+    position: absolute;
+    left: 25%;
+    top: 65%;
+    z-index: 100;
+    transition: all 1s linear;
+}
+
+.sf.team1 {
+    position: absolute;
+    left: 8%;
+    top: 84%;
+    z-index: 100;
+    transition: all 1s linear;
+}
+
+.pf.team1 {
+    position: absolute;
+    left: 7%;
+    top: 8%;
+    z-index: 100;
+    transition: all 1s linear;
+}
+
+.c.team1 {
+    position: absolute;
+    left: 20%;
+    top: 45%;
+    z-index: 100;
+    transition: all 1s linear;
+}
+
+.number {
+    font-size: 20pt;
+    color: white;
+    position: relative;
+    top: 27px;
+}
+
+.playerName {
+    font-size: 18pt;
+    color: black;
+    position: absolute;
+    top: 100%;
+    left: 0%;
+}
+
+.pg.team2 {
+    position: absolute;
+    right: 46%;
+    z-index: 100;
+    transition: all 1s linear;
+}
+
+.sg.team2 {
+    position: absolute;
+    right: 43%;
+    top: 65%;
+    z-index: 100;
+    transition: all 1s linear;
+}
+
+.sf.team2 {
+    position: absolute;
+    right: 26%;
+    top: 84%;
+    z-index: 100;
+    transition: all 1s linear;
+}
+
+.pf.team2 {
+    position: absolute;
+    right: 26%;
+    top: 8%;
+    z-index: 100;
+    transition: all 1s linear;
+}
+
+.c.team2 {
+    position: absolute;
+    right: 38%;
+    top: 45%;
+    z-index: 100;
+    transition: all 1s linear;
+}
+
+.team1bench {
+    position: absolute;
+    top: 25%;
+    left: -15%;
+}
+
+.bench {
+    line-height: 20pt;
+    transform: scale(1.75);
+}
+
+.team2bench {
+    position: absolute;
+    top: 25%;
+    right: 3%;
+}
+
+/*
+--------------- Table Styles 
+*/
+.statsTable {
+    font-family: Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    background-color: rgba(10, 9, 9, 0.781);
+    color: white;
+}
+
+.statsTable td, .statsTable th {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+.statsTable th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: rgb(37, 31, 31);
+    color: white;
+}
+
+/*
+------------------ Creates basketball
+*/
+.basketball {
+    position: relative;
+    top: 20px;
+    left: 50px;
+    transform: scale(0.5);
+    transition: all 1s linear;
+    z-index: 101;
+}
+  
+.ball {
+    position: absolute;
+    background-color: #e76f51;
+    border-radius:50%;
+    width:100px;
+    height:100px;
+    overflow: hidden;
+    border: 3px solid #333;
+}
+
+  
+.ball:before, .ball:after {
+    content:"";
+    position: absolute;
+    background-color: #333;
+    width:110px;
+    height:3px;
+    top:50px;
+    left:-5px;
+}
+  
+.ball:before {
+    transform: rotate(45deg);
+}
+
+.ball:after {
+    transform: rotate(-45deg);
+}
+
+.lines {
+    position: absolute;
+    border-radius:50%;
+    border: 3px solid #333;
+    width:70px;
+    height:70px;
+    left:-20px;
+    top:-20px;
+}
+
+.lines:before {
+    content:"";
+    position: absolute; 
+    border-radius:50%;
+    border: 3px solid #333;
+    width:70px;
+    height:70px;
+    top:65px;
+    left:60px;
+}
+
+/*
+--------------------- Animations
+*/
+
+.attacking1pg {
+    transform: translateX(330%);
+}
+
+.attacking1sg {
+    transform: translateX(420%);
+}
+
+.attacking1sf {
+    transform: translateX(1180%);
+}
+
+.attacking1pf {
+    transform: translateX(1180%);
+}
+
+.attacking1c {
+    transform: translateX(900%);
+}
+
+.shot {
+    top: -375px;
+    left: 150px;
+    visibility: hidden;
 }
