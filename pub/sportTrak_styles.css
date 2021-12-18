@@ -201,6 +201,7 @@
 */
 .bench {
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    width: fit-content;
 }
 
 /*
@@ -292,23 +293,23 @@
 --------------------- Basketball Animations
 */
 
-.attacking1pg {
+.attacking1pg .bballPlayer {
     transform: translateX(330%);
 }
 
-.attacking1sg {
+.attacking1sg .bballPlayer {
     transform: translateX(420%);
 }
 
-.attacking1sf {
+.attacking1sf .bballPlayer {
     transform: translateX(1180%);
 }
 
-.attacking1pf {
+.attacking1pf .bballPlayer {
     transform: translateX(1180%);
 }
 
-.attacking1c {
+.attacking1c .bballPlayer {
     transform: translateX(900%);
 }
 
@@ -448,12 +449,13 @@
     text-align: center;
     position: absolute;
     top: 15px;
-    left: -5px;
+    left: -10px;
 }
 
 .f4-2-3-1:nth-of-type(1) {
     top: 185px;
     left: 15px;
+    transition: all 1s linear;
 }
 
 .f4-2-3-1:nth-of-type(2) {
@@ -509,6 +511,7 @@
 .f4-1-3-2:nth-of-type(1) {
     top: 185px;
     left: 15px;
+    transition: all 1s linear;
 }
 
 .f4-1-3-2:nth-of-type(2) {
@@ -591,4 +594,38 @@
     background: transparent;
     height: 15px;
     width: 15px;
+    position: absolute;
+    transition: all 1s linear;
 }
+
+/*
+----------------- Soccer Player Animations
+*/
+.penaltyTaker {
+    left: 500px !important;
+}
+
+.penalty {
+    left: 110px !important;
+}
+
+.crossStart {
+    left: 430px !important;
+    top: 55px !important;
+}
+
+.crossRecieve {
+    left: 430px !important;
+    top: 305px !important;
+}
+
+.inBox {
+    left: 500px !important;
+    top: 185px !important;
+}
+
+.corner {
+    top: 15px !important;
+    left: 560px !important;
+}
+

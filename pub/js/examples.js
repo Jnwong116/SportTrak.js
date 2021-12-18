@@ -272,8 +272,27 @@ const soccerData = {
         {name: 'Donyell Malen', shots: 2, challengesWon: 1}
     ],
     highlights: [
-        {currScore: '2 - 2',
-        play:  "Lewandowski scores penalty"}
+        {
+            currScore: '2 - 2',
+            // play: "Lewandowski scores penalty"
+            play: "Gnabry cross to Sane, Sane scores"
+        },
+        {
+            currScore: '0 - 0',
+            play: "Muller through pass to Lewandowski, Lewandowski scores"
+        },
+        {
+            currScore: '1 - 0',
+            play: "Bellingham corner, Haaland scores"
+        },
+        {
+            currScore: '1 - 1',
+            play: "Coman dribbles, Coman scores"
+        },
+        {
+            currScore: '2 - 1',
+            play: "Upamecano tackles Haaland, Upamecano yellow card"
+        }
     ]
 }
 
@@ -309,6 +328,18 @@ function clearPage() {
 
 function showHighlight(num) {
     // sportTracker.playAnimation(num);
-    sportTracker.spawnBall()
+    // sportTracker.spawnBall()
+
+    for (let i = 0; i < 10; i++) {
+        setTimeout(function() {
+            test(i)
+        }, 3000)
+        
+    }
 }
 
+function test(i) {
+    setTimeout(function() {
+        log(i)
+    }, 2000)
+}

@@ -8,7 +8,7 @@ const animationList = [
     },
     {
         sport: 'soccer',
-        animations: ['scores penalty', 'saves penalty', 'cross', 'corner', 'scores', 'yellow card', 'red card', 'tackles', 'pass', 'through pass', 'dribble']
+        animations: ['scores penalty', 'saves penalty', 'cross to', 'corner', 'scores', 'yellow card', 'red card', 'tackles', 'through pass to', 'pass to', 'dribble', 'sub']
     }
 ];
 
@@ -164,6 +164,75 @@ const animationList = [
         })
 
         return [team1players, team2players];
+    }
+
+    function _basketballAnimation(court, players, defendingTeam, attackingTeam, playerAnimations, team1starters) {
+        // Moves attacking team up
+        for (let i = 0; i < attackingTeam.length; i++) {
+            const player = attackingTeam[i]
+            player.classList.add('attacking' + attackingTeamNum + Object.keys(team1starters)[i]);
+        }
+
+        const playersInPlay = []
+        // Links players in play to the player object
+        for (let i = 0; i < players.length; i++) {
+            const player = players[i].trim()
+            for (let j = 0; j < Object.keys(team1starters).length; j++) {
+                const team1player = team1starters[Object.keys(team1starters)[j]].name;
+                if (team1player.includes(player)) {
+                    playersInPlay.push({
+                        player: this.team1players[j],
+                        defender: j})
+                }
+            }
+        }
+
+        // Creates basketball
+        const basketball = _createBasketball()
+        playersInPlay[0].player.appendChild(basketball)
+
+        // Animates the play
+        let previousAnimation = '';
+        let previousPlayer = playersInPlay[0].player;
+        let playerWithBall = playersInPlay[0].player;
+        for (let i = 0; i < playerAnimations.length; i++) {
+            setTimeout(function() {
+                let playerInAnimation = playersInPlay[i].player;
+                let defendingPlayer = defendingTeam[playersInPlay[i].defender];
+                
+                // Do previous animation first
+                if (previousAnimation !== '') {
+                    switch (previousAnimation) {
+                        case 'double team':
+                            defendingPlayer.style.transform = "translate(" + (-previousPlayer.offsetLeft + 130)  + "px, " + (-previousPlayer.offsetTop + 140) + "px)";
+                            break;
+                    }
+                }
+
+                switch (playerAnimations[i]) {
+                    case 'double team':
+                        previousAnimation = 'double team';
+                        previousPlayer = playersInPlay[i].player;
+                        playerWithBall = playersInPlay[i].player;
+                        break;
+                    case 'pass to':
+                        playerWithBall = playersInPlay[i].player;
+                        const rect = playerWithBall.getBoundingClientRect();
+                        // court.appendChild(newBasketball)
+                        // log(rect.left)
+                        // newBasketball.style = "left: " + -rect.left + "px; top: " + -rect.top + "px;";
+                        previousPlayer.removeChild(basketball);
+                        playerWithBall.appendChild(basketball)
+                        break;
+                    case 'open three':
+                        playerWithBall = '';
+                        basketball.classList.add('shot');
+                        break;
+                }
+            }, 1000)
+
+            
+        }
     }
 
     function _createSoccerField() {
@@ -355,6 +424,169 @@ const animationList = [
             pStats.innerHTML += str + '<br />';
         })
     }
+
+    function _createSoccerBall(court, player, attackingTeamNum) {
+            const soccerBall = document.createElement('img');
+            soccerBall.src = './ball_img/soccer.png';
+            soccerBall.className = 'soccerBall'
+            soccerBall.style.left = (player.offsetLeft + 5) + 'px';
+            soccerBall.style.top = (player.offsetTop + 5) + 'px';
+
+            if (attackingTeamNum === 2) {
+                court.childNodes[4].appendChild(soccerBall)
+            }
+            else {
+                court.childNodes[3].appendChild(soccerBall)
+            }
+
+            return soccerBall
+    }
+
+    function _soccerAnimation(court, players, playerAnimations, attackingTeam, defendingTeam, attackingTeamNum) {
+        const playersInPlay = []
+        // Links players in play to the player object
+        for (let i = 0; i < players.length; i++) {
+            const player = players[i].trim()
+            for (let j = 0; j < attackingTeam.length; j++) {
+                const attackingPlayer = attackingTeam[j].childNodes[0].innerHTML;
+                if (attackingPlayer.includes(player)) {
+                    playersInPlay.push(attackingTeam[j])
+                }
+            }
+        }
+
+        let p = 0;
+        let ball = ''
+        for (let i = 0; i < playerAnimations.length; i++) {
+            switch (playerAnimations[i]) {
+                case 'scores penalty':
+                    ball = _animateSoccer(court, playerAnimations[i], playersInPlay, p, attackingTeam, defendingTeam, attackingTeamNum)
+
+                    p++;
+                    break;
+                case 'saves penalty':
+                    ball = _animateSoccer(court, playerAnimations[i], playersInPlay, p, attackingTeam, defendingTeam, attackingTeamNum)
+
+                    p++;
+                    break;
+                case 'cross to':
+                    ball = _animateSoccer(court, playerAnimations[i], playersInPlay, p, attackingTeam, defendingTeam, attackingTeamNum)
+
+                    p+= 2;
+                    break;
+                case 'corner':
+                    ball = _animateSoccer(court, playerAnimations[i], playersInPlay, p, attackingTeam, defendingTeam, attackingTeamNum)
+
+                    p++;
+                    break;
+                case 'scores':
+                    ball = _animateSoccer(court, playerAnimations[i], playersInPlay, p, attackingTeam, defendingTeam, attackingTeamNum)
+                    
+                    p++;
+                    break;
+            }
+        }
+    }
+
+    function _animateSoccer(court, playerAnimation, playersInPlay, p, attackingTeam, defendingTeam, attackingTeamNum, i) {
+        let player = '';
+        let player2 = '';
+        let ball = '';
+        setTimeout(function() {
+            switch (playerAnimation) {
+                case 'scores penalty':
+                    player = playersInPlay[p];
+                    player.classList.add('penaltyTaker')
+
+                    // Moves defending players out of box
+                    defendingTeam[1].classList.add('penalty');
+                    defendingTeam[2].classList.add('penalty');
+
+                    ball = _createSoccerBall(court, player, attackingTeamNum);
+                    setTimeout(function() {
+                        ball.style.left = ball.offsetLeft + 55  + "px";
+                        ball.style.top = ball.offsetTop + 20 + "px";  
+                        ball.style.visibility = 'hidden'
+                    }, 500)
+
+                    break;
+                case 'saves penalty':
+                    player = defendingTeam[10];
+                    player.classList.add('penaltyTaker')
+
+                    // Moves defending players out of box
+                    attackingTeam[1].classList.add('penalty');
+                    attackingTeam[2].classList.add('penalty');
+
+                    const goalie = playersInPlay[p];
+
+                    ball = _createSoccerBall(court, player, attackingTeamNum);
+                    setTimeout(function() {
+                        ball.style.left = ball.offsetLeft + 55  + "px";
+                        ball.style.top = ball.offsetTop + 20 + "px";  
+                        goalie.style.top = goalie.offsetTop + 20 + "px";
+                    }, 500)
+
+                    break;
+                case 'cross to':
+                    player = playersInPlay[p];
+                    player2 = playersInPlay[p + 1];
+                    player.classList.add('crossStart');
+
+                    if (playerAnimations[i + 1] === 'scores') {
+                        player2.classList.add('inBox');
+                        defendingTeam[2].style.top = defendingTeam[2].offsetTop + 10 + "px";
+                    }
+                    else {
+                        player2.classList.add('crossRecieve')
+                    }
+
+                    ball = _createSoccerBall(court, player, attackingTeamNum);
+                        setTimeout(function() {
+                            ball.style.left = player2.offsetLeft + 5  + "px";
+                            ball.style.top = player2.offsetTop + 5 + "px";  
+                        }, 500)
+
+                    break;
+                case 'corner':
+                    player = playersInPlay[p];
+                    player.classList.add('corner');
+                    player2 = playersInPlay[p + 1];
+                    player2.classList.add('inBox');
+                    defendingTeam[2].style.top = defendingTeam[2].offsetTop + 10 + "px";
+
+                    ball = _createSoccerBall(court, player, attackingTeamNum);
+                        setTimeout(function() {
+                            ball.style.left = player2.offsetLeft + 5  + "px";
+                            ball.style.top = player2.offsetTop + 5 + "px";  
+                        }, 500)
+
+                    break;
+                case 'scores':
+                    player = playersInPlay[p];
+                    ball = _createSoccerBall(court, player, attackingTeamNum);
+                    setTimeout(function() {
+                        ball.style.left = '560px';
+                        ball.style.top = ball.offsetTop - 20 + "px";
+                    }, 500)
+                    
+                    break;
+            }
+
+            log(document.getElementsByClassName('soccerBall'))
+            // // Removes old ball
+            // if (document.getElementsByClassName('soccerBall').length !== 0) {
+            //     if (attackingTeamNum === 2) {
+            //         court.childNodes[4].removeChild(document.getElementsByClassName('soccerBall')[0])
+            //     }
+            //     else {
+            //         court.childNodes[3].removeChild(document.getElementsByClassName('soccerBall')[0])
+            //     }
+            // }
+        }, 1500)
+    }
+
+    // function _soccerAnimation()
 
     sportTraker.prototype = {
 
@@ -549,7 +781,6 @@ const animationList = [
     
         playAnimation: function(animationNum) {
             const court = this.court;
-            log(this.team1players)
             const highlight = this.highlights[animationNum];
     
             let animations = [];
@@ -561,14 +792,28 @@ const animationList = [
             
             const currScore = highlight.currScore;
             
+            // Gets the animations and the players in each highlight
             const players = []
             const playerAnimations = []
             const animationSteps = highlight.play.split(",");
             animationSteps.forEach(play => {
+                let skip = false
                 animations.forEach(animation => {
+                    if (skip) {
+                        return
+                    }
+
                     if (play.includes(animation)) {
                         playerAnimations.push(animation);
-                        players.push(play.replace(animation, ""));
+                        let playOnlyPlayers = play.replace(animation, "");
+                        let playSplit = playOnlyPlayers.split(" ");
+                        playSplit.forEach(player => {
+                            if (player !== '') {
+                                players.push(player)
+                            }
+                        });
+                        skip = true
+                        return
                     }
                 });
             });
@@ -589,85 +834,17 @@ const animationList = [
                 attackingTeamNum = 2;
                 defendingTeam = this.team1players;
             }
-    
-            // Moves attacking team up
-            for (let i = 0; i < attackingTeam.length; i++) {
-                const player = attackingTeam[i]
-                player.classList.add('attacking' + attackingTeamNum + Object.keys(this.team1starters)[i]);
-            }
-    
-            const playersInPlay = []
-            // Links players in play to the player object
-            for (let i = 0; i < players.length; i++) {
-                const player = players[i].trim()
-                for (let j = 0; j < Object.keys(this.team1starters).length; j++) {
-                    const team1player = this.team1starters[Object.keys(this.team1starters)[j]].name;
-                    if (team1player.includes(player)) {
-                        playersInPlay.push({
-                            player: this.team1players[j],
-                            defender: j})
-                    }
-                }
-            }
-    
-            // Creates basketball
-            const basketball = createBasketball()
-            playersInPlay[0].player.appendChild(basketball)
-    
-            // Animates the play
-            let previousAnimation = '';
-            let previousPlayer = playersInPlay[0].player;
-            let playerWithBall = playersInPlay[0].player;
-            for (let i = 0; i < playerAnimations.length; i++) {
-                setTimeout(function() {
-                    let playerInAnimation = playersInPlay[i].player;
-                    let defendingPlayer = defendingTeam[playersInPlay[i].defender];
-                    
-                    // Do previous animation first
-                    if (previousAnimation !== '') {
-                        switch (previousAnimation) {
-                            case 'double team':
-                                defendingPlayer.style.transform = "translate(" + (-previousPlayer.offsetLeft + 130)  + "px, " + (-previousPlayer.offsetTop + 140) + "px)";
-                                break;
-                        }
-                    }
-    
-                    switch (playerAnimations[i]) {
-                        case 'double team':
-                            previousAnimation = 'double team';
-                            previousPlayer = playersInPlay[i].player;
-                            playerWithBall = playersInPlay[i].player;
-                            break;
-                        case 'pass to':
-                            playerWithBall = playersInPlay[i].player;
-                            const rect = playerWithBall.getBoundingClientRect();
-                            // court.appendChild(newBasketball)
-                            // log(rect.left)
-                            // newBasketball.style = "left: " + -rect.left + "px; top: " + -rect.top + "px;";
-                            previousPlayer.removeChild(basketball);
-                            playerWithBall.appendChild(basketball)
-                            break;
-                        case 'open three':
-                            playerWithBall = '';
-                            basketball.classList.add('shot');
-                            break;
-                    }
-                }, 1000)
-    
-                
+
+            //Animates players
+            switch (this.sport) {
+                case 'soccer':
+                    _soccerAnimation(court, players, playerAnimations, attackingTeam, defendingTeam, attackingTeamNum)
+                    break;
+                case 'basketball':
+                    _basketballAnimation()
+                    break;
             }
 
-        },
-
-        spawnBall: function() {
-            const court = this.court;
-
-            let player = this.team1players[11]
-
-            const soccerBall = document.createElement('img');
-            soccerBall.src = './ball_img/soccer.png';
-            soccerBall.className = 'soccerBall'
-            court.appendChild(soccerBall)
         }
     }
 
