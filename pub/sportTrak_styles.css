@@ -583,3 +583,12 @@
     padding: 10px;
 
 }
+
+/*
+------------- Soccer Ball
+*/
+.soccerBall {
+    background-color: transparent;
+    height: 10px;
+    width: 10px;
+}

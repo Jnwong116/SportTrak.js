@@ -666,6 +666,7 @@ const animationList = [
 
             const soccerBall = document.createElement('img');
             soccerBall.src = '/ball_img/soccer.png';
+            soccerBall.className = 'soccerBall'
             court.appendChild(soccerBall)
         }
     }
