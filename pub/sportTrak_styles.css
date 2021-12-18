@@ -96,7 +96,7 @@
 /*
 ------------------- Player and team lineup styles
 */
-.player {
+.bballPlayer {
     width: 90px;
     height: 90px;
     border-radius: 50%;
@@ -142,14 +142,14 @@
     transition: all 1s linear;
 }
 
-.number {
+.bballNumber {
     font-size: 20pt;
     color: white;
     position: relative;
     top: 27px;
 }
 
-.playerName {
+.bballPlayerName {
     font-size: 18pt;
     color: black;
     position: absolute;
@@ -196,21 +196,11 @@
     transition: all 1s linear;
 }
 
-.team1bench {
-    position: absolute;
-    top: 25%;
-    left: -15%;
-}
-
+/*
+------------- Bench
+*/
 .bench {
-    line-height: 20pt;
-    transform: scale(1.75);
-}
-
-.team2bench {
-    position: absolute;
-    top: 25%;
-    right: 3%;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 
 /*
@@ -299,7 +289,7 @@
 }
 
 /*
---------------------- Animations
+--------------------- Basketball Animations
 */
 
 .attacking1pg {
@@ -326,4 +316,270 @@
     top: -375px;
     left: 150px;
     visibility: hidden;
+}
+
+.score {
+    position: relative;
+    top: 0;
+    left: 50%;
+}
+
+/*
+--------------------------- Soccer field 
+*/
+.pitch {
+    background-color: #238729;
+    width: 590px;
+    height: 380px;
+    position: relative;
+}
+
+.pitch:after {
+    content: "";
+    border-left: 1px solid rgba(255, 255, 255, 0.507);
+    position: absolute;
+    top: 20px;
+    left: 295px;
+    display: block;
+    height: 340px;
+}
+
+.pitch:before {
+    content: "";
+    border: 1px solid rgba(255, 255, 255, 0.507);
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    display: block;
+    width: 550px;
+    height: 340px;
+}
+
+.center {
+    position: absolute;
+    top: 145px;
+    left: 250px;
+    width: 90px;
+    height: 90px;
+    border: 1px solid rgba(255, 255, 255, 0.507);
+    border-radius: 50%;
+}
+.center:after {
+    position: absolute;
+    top: 43px;
+    left: 43px;
+    width: 1px;
+    height: 1px;
+    background-color:white;
+    content: "";
+    border: 1px solid rgba(255, 255, 255, 0.507);
+}
+
+.penaltyArea {
+    position: absolute;
+    height: 140px;
+    width: 80px;
+    top: 120px;
+    border: 1px solid rgba(255, 255, 255, 0.507);
+}
+
+.left .penaltyArea {
+    left: 20px;
+    border-left: 0;
+}
+
+.right .penaltyArea {
+    right: 19px;
+    border-right: 0;
+}
+
+.penaltyArea:before {
+    position: absolute;
+    height: 70px;
+    width: 35px;
+    top: 35px;
+    border: 1px solid rgba(255, 255, 255, 0.507);
+    content: "";
+}
+.left .penaltyArea:before {
+    left: 0px;
+    border-left: 0;
+}
+.right .penaltyArea:before {
+    right: 0px;
+    border-right: 0;
+}
+
+.penaltyArea:after {
+    position: absolute;
+    height: 2px;
+    width: 2px;
+    top: 70px;
+    background-color:white;
+    content: "";
+}
+.left .penaltyArea:after {
+    right: 15px;
+}
+.right .penaltyArea:after {
+    left: 15px;
+}
+
+/*
+--------------- Soccer Player Styles
+*/
+.soccPlayer {
+    position: absolute;
+    border-radius: 50%;
+    width: 15px;
+    height: 15px;
+}
+
+.soccNumber {
+    font-size: 12px;
+    position: absolute;
+    left: 2.5px;
+}
+
+.soccPlayerName {
+    font-size: 10px;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    color: white;
+    text-align: center;
+    position: absolute;
+    top: 15px;
+    left: -5px;
+}
+
+.f4-2-3-1:nth-of-type(1) {
+    top: 185px;
+    left: 15px;
+}
+
+.f4-2-3-1:nth-of-type(2) {
+    top: 140px;
+    left: 75px;
+}
+
+.f4-2-3-1:nth-of-type(3) {
+    top: 220px;
+    left: 75px;
+}
+
+.f4-2-3-1:nth-of-type(4) {
+    top: 305px;
+    left: 75px;
+}
+
+.f4-2-3-1:nth-of-type(5) {
+    top: 55px;
+    left: 75px;
+}
+
+.f4-2-3-1:nth-of-type(6) {
+    top: 140px;
+    left: 140px;
+}
+
+.f4-2-3-1:nth-of-type(7) {
+    top: 220px;
+    left: 140px;
+}
+
+.f4-2-3-1:nth-of-type(8) {
+    top: 305px;
+    left: 185px;
+}
+
+.f4-2-3-1:nth-of-type(9) {
+    top: 55px;
+    left: 185px;
+}
+
+.f4-2-3-1:nth-of-type(10) {
+    top: 185px;
+    left: 185px;
+}
+
+.f4-2-3-1:nth-of-type(11) {
+    top: 185px;
+    left: 235px;
+}
+
+.f4-1-3-2:nth-of-type(1) {
+    top: 185px;
+    left: 15px;
+}
+
+.f4-1-3-2:nth-of-type(2) {
+    top: 140px;
+    left: 75px;
+}
+
+.f4-1-3-2:nth-of-type(3) {
+    top: 220px;
+    left: 75px;
+}
+
+.f4-1-3-2:nth-of-type(4) {
+    top: 305px;
+    left: 75px;
+}
+
+.f4-1-3-2:nth-of-type(5) {
+    top: 55px;
+    left: 75px;
+}
+
+.f4-1-3-2:nth-of-type(6) {
+    top: 185px;
+    left: 140px;
+}
+
+.f4-1-3-2:nth-of-type(7) {
+    top: 185px;
+    left: 185px;
+}
+
+.f4-1-3-2:nth-of-type(8) {
+    top: 305px;
+    left: 185px;
+}
+
+.f4-1-3-2:nth-of-type(9) {
+    top: 55px;
+    left: 185px;
+}
+
+.f4-1-3-2:nth-of-type(10) {
+    top: 140px;
+    left: 240px;
+}
+
+.f4-1-3-2:nth-of-type(11) {
+    top: 220px;
+    left: 240px;
+}
+
+.awayTeam {
+    transform: scale(-1, 1);
+}
+
+.awayTeam .soccNumber {
+    transform: scale(-1, 1);
+}
+
+.awayTeam .soccPlayerName {
+    transform: scale(-1, 1);
+}
+
+/*
+------------- Player Stats
+*/
+.playerStats {
+    border: 1px solid black;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    width: fit-content;
+    padding: 10px;
+
 }

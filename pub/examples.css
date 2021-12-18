@@ -12,3 +12,33 @@ button {
     position: relative;
     left: 50%;
 }
+
+.courtWrapper {
+    position: absolute;
+    top: 45%;
+    left: 25%
+}
+
+
+
+.team1bench {
+    position: relative;
+    left: 20px;
+}
+
+.team2bench {
+    position: relative;
+    float: right;
+}
+
+.statTableWrapper {
+    position: relative;
+    left: 25%;
+    top: 25%;
+}
+
+.playerStatWrapper {
+    position: absolute;
+    top: 2%;
+    left: 75%;
+}
