@@ -1,4 +1,5 @@
 "use strict";
+
 const log = console.log
 
 const animationList = [
@@ -44,6 +45,7 @@ const animationList = [
     
         this.highlights = data.highlights
         this.scale = 1;
+        this.scoreboard = '';
         
     }
 
@@ -457,43 +459,14 @@ const animationList = [
 
         let p = 0;
         let ball = ''
-        for (let i = 0; i < playerAnimations.length; i++) {
-            switch (playerAnimations[i]) {
-                case 'scores penalty':
-                    ball = _animateSoccer(court, playerAnimations[i], playersInPlay, p, attackingTeam, defendingTeam, attackingTeamNum)
-
-                    p++;
-                    break;
-                case 'saves penalty':
-                    ball = _animateSoccer(court, playerAnimations[i], playersInPlay, p, attackingTeam, defendingTeam, attackingTeamNum)
-
-                    p++;
-                    break;
-                case 'cross to':
-                    ball = _animateSoccer(court, playerAnimations[i], playersInPlay, p, attackingTeam, defendingTeam, attackingTeamNum)
-
-                    p+= 2;
-                    break;
-                case 'corner':
-                    ball = _animateSoccer(court, playerAnimations[i], playersInPlay, p, attackingTeam, defendingTeam, attackingTeamNum)
-
-                    p++;
-                    break;
-                case 'scores':
-                    ball = _animateSoccer(court, playerAnimations[i], playersInPlay, p, attackingTeam, defendingTeam, attackingTeamNum)
-                    
-                    p++;
-                    break;
-            }
-        }
+        _animateSoccer(court, playerAnimations, playersInPlay, p, attackingTeam, defendingTeam, attackingTeamNum, 0, ball)
     }
 
-    function _animateSoccer(court, playerAnimation, playersInPlay, p, attackingTeam, defendingTeam, attackingTeamNum, i) {
+    function _animateSoccer(court, playerAnimations, playersInPlay, p, attackingTeam, defendingTeam, attackingTeamNum, i, ball) {
         let player = '';
         let player2 = '';
-        let ball = '';
         setTimeout(function() {
-            switch (playerAnimation) {
+            switch (playerAnimations[i]) {
                 case 'scores penalty':
                     player = playersInPlay[p];
                     player.classList.add('penaltyTaker')
@@ -507,8 +480,30 @@ const animationList = [
                         ball.style.left = ball.offsetLeft + 55  + "px";
                         ball.style.top = ball.offsetTop + 20 + "px";  
                         ball.style.visibility = 'hidden'
+
+                        // Shows goal notification
+                        const goal = document.getElementsByClassName('goalNotif')[0];
+                        setTimeout(function() {
+                            setTimeout(function() {
+                                goal.style.visibility = 'hidden';
+                            }, 1000)
+                            goal.style.visibility = 'visible'
+
+                            // Updates scoreboard
+                            const scoreboard = document.getElementsByClassName('teamScore');
+                            if (attackingTeamNum === 1) {
+                                const score = scoreboard[0];
+                                score.innerHTML = parseInt(score.innerHTML) + 1;
+                            }
+                            else {
+                                const score = scoreboard[1];
+                                score.innerHTML = parseInt(score.innerHTML) + 1;
+                            }
+
+                        }, 1000)
                     }, 500)
 
+                    p++;
                     break;
                 case 'saves penalty':
                     player = defendingTeam[10];
@@ -527,6 +522,7 @@ const animationList = [
                         goalie.style.top = goalie.offsetTop + 20 + "px";
                     }, 500)
 
+                    p++;
                     break;
                 case 'cross to':
                     player = playersInPlay[p];
@@ -547,6 +543,7 @@ const animationList = [
                             ball.style.top = player2.offsetTop + 5 + "px";  
                         }, 500)
 
+                    p+= 2;
                     break;
                 case 'corner':
                     player = playersInPlay[p];
@@ -564,26 +561,43 @@ const animationList = [
                     break;
                 case 'scores':
                     player = playersInPlay[p];
-                    ball = _createSoccerBall(court, player, attackingTeamNum);
                     setTimeout(function() {
                         ball.style.left = '560px';
                         ball.style.top = ball.offsetTop - 20 + "px";
+                        ball.style.visibility = 'hidden';
+
+                        // Shows goal notification
+                        const goal = document.getElementsByClassName('goalNotif')[0];
+                        setTimeout(function() {
+                            setTimeout(function() {
+                                goal.style.visibility = 'hidden';
+                            }, 1000)
+                            goal.style.visibility = 'visible'
+
+                            // Updates scoreboard
+                            const scoreboard = document.getElementsByClassName('teamScore');
+                            if (attackingTeamNum === 1) {
+                                const score = scoreboard[0];
+                                score.innerHTML = parseInt(score.innerHTML) + 1;
+                            }
+                            else {
+                                const score = scoreboard[1];
+                                score.innerHTML = parseInt(score.innerHTML) + 1;
+                            }
+
+                        }, 1000)
+                        
                     }, 500)
                     
+                    p++;
                     break;
             }
 
-            log(document.getElementsByClassName('soccerBall'))
-            // // Removes old ball
-            // if (document.getElementsByClassName('soccerBall').length !== 0) {
-            //     if (attackingTeamNum === 2) {
-            //         court.childNodes[4].removeChild(document.getElementsByClassName('soccerBall')[0])
-            //     }
-            //     else {
-            //         court.childNodes[3].removeChild(document.getElementsByClassName('soccerBall')[0])
-            //     }
-            // }
-        }, 1500)
+            i++;
+            if (i < playerAnimations.length) {
+                _animateSoccer(court, playerAnimations, playersInPlay, p, attackingTeam, defendingTeam, attackingTeamNum, i, ball)
+            }
+        }, 1000)
     }
 
     // function _soccerAnimation()
@@ -610,8 +624,8 @@ const animationList = [
             const wrapper = document.createElement('div');
             wrapper.appendChild(court)
             wrapper.className = 'courtWrapper'
-            document.body.appendChild(wrapper)
             this.court = court;
+            return wrapper;
         },
     
         displayPlayers: function() {
@@ -650,7 +664,6 @@ const animationList = [
     
             benchTeam1.classList.add('team1bench');
             benchTeam1.classList.add('bench');
-            document.body.appendChild(benchTeam1)
     
             const benchTeam2 = document.createElement('div');
             const benchHeader2 = document.createElement('h2');
@@ -664,7 +677,7 @@ const animationList = [
     
             benchTeam2.classList.add('team2bench');
             benchTeam2.classList.add('bench');
-            document.body.appendChild(benchTeam2);
+            return [benchTeam1, benchTeam2]
         },
     
         showStats: function() {
@@ -775,12 +788,13 @@ const animationList = [
             const tableWrapper = document.createElement('div')
             tableWrapper.className = 'statTableWrapper';
             tableWrapper.appendChild(table)
-            document.body.appendChild(tableWrapper);
             this.table = table;
+            return tableWrapper;
         },
     
         playAnimation: function(animationNum) {
             const court = this.court;
+            log(court)
             const highlight = this.highlights[animationNum];
     
             let animations = [];
@@ -789,8 +803,6 @@ const animationList = [
                     animations = sport.animations;
                 }
             });
-            
-            const currScore = highlight.currScore;
             
             // Gets the animations and the players in each highlight
             const players = []
@@ -834,6 +846,83 @@ const animationList = [
                 attackingTeamNum = 2;
                 defendingTeam = this.team1players;
             }
+
+            // Creates scoreboard
+            const currScore = highlight.currScore;
+            const currTime = highlight.time;
+
+            let team1 = '';
+            let team2 = '';
+            let team1score = '';
+            let team2score = '';
+            let time = '';
+            let courtWrapper = ''
+
+            if (this.scoreboard === '') {
+                const scoreboard = document.createElement('div');
+                scoreboard.className = 'scoreboard';
+                
+                team1 = document.createElement('h2')
+                team1.className = 'scoreBoardTeam1'
+
+                team2 = document.createElement('h2');
+                team2.className = 'scoreBoardTeam2'
+                courtWrapper = this.court;
+                courtWrapper.appendChild(scoreboard);
+                
+                const teamNames = document.createElement('div');
+                teamNames.className = 'teamNames';
+                teamNames.appendChild(team1)
+                teamNames.appendChild(team2)
+
+                const scores = document.createElement('div');
+                scores.className = 'teamScores';
+
+                team1score = document.createElement('span')
+                team1score.className = 'teamScore'
+
+                team2score = document.createElement('span')
+                team2score.className = 'teamScore'
+
+                time = document.createElement('span')
+                time.className = 'scoreTime'
+
+                scores.appendChild(team1score);
+                scores.appendChild(time);
+                scores.appendChild(team2score);
+
+                scoreboard.appendChild(teamNames)
+                scoreboard.appendChild(scores)
+            }
+
+            else {
+                team1 = document.getElementsByClassName('scoreBoardTeam1')[0];
+                team2 = document.getElementsByClassName('scoreBoardTeam2')[0];
+                team1score = document.getElementsByClassName('teamScore')[0];
+                team2score = document.getElementsByClassName('teamScore')[1];
+                time = document.getElementsByClassName('scoreTime')[0];
+                courtWrapper = document.getElementsByClassName('courtWrapper')[0];
+            }
+
+            const teamScores = currScore.split(' - ');
+            const scoreTeam1 = teamScores[0];
+            const scoreTeam2 = teamScores[1];
+            
+            team1.innerHTML = this.team1;
+            team2.innerHTML = this.team2;
+
+            team1score.innerHTML = scoreTeam1;
+            team2score.innerHTML = scoreTeam2;
+
+            time.innerHTML = currTime + '\''
+
+            // Creates GOAL words
+            const goal = document.createElement('div')
+            goal.className = 'goalNotif';
+            goal.innerHTML = "GOAL!";
+            goal.style.visibility = 'hidden';
+
+            courtWrapper.appendChild(goal)
 
             //Animates players
             switch (this.sport) {

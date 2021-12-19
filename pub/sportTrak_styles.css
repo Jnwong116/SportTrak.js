@@ -439,7 +439,8 @@
 .soccNumber {
     font-size: 12px;
     position: absolute;
-    left: 2.5px;
+    left: 2px;
+    top: -1px;
 }
 
 .soccPlayerName {
@@ -629,3 +630,51 @@
     left: 560px !important;
 }
 
+/*
+----------------------- Scoreboard
+*/
+.scoreboard {
+    position: relative;
+    top: -100px;
+    z-index: 100;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    width: 100%;
+}
+
+.scoreBoardTeam1 {
+    flex: 50%;
+}
+
+.scoreBoardTeam2 {
+    flex: 50%;
+}
+
+.teamScore {
+    flex: 33%;
+}
+
+.scoreTime {
+    flex: 34%;
+}
+
+.teamNames {
+    display: flex;
+    margin-bottom: 15px;
+}
+
+.teamScores {
+    display: flex;
+    position: relative;
+    left: 50px;
+    font-size: 10pt;
+}
+
+.goalNotif {
+    z-index: 99;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    color: red;
+    font-size: 40pt;
+    position: relative;
+    top: -100px;
+    left: 35%;
+}

@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <title>SportTrak.JS Examples</title>
+
+        <link href="./dist/css/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="documentation.css">
+        <script defer type="text/javascript" src="./js/examples.js"></script>
+
+    </head>
+    <body class="body">
+        <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+            <header class="mb-auto main_header">
+                <div>
+                <h3 class="float-md-start mb-0">SportTrak.js</h3>
+                <nav class="nav nav-masthead justify-content-center float-md-end">
+                    <a class="nav-link active" aria-current="page" href="/">Home</a>
+                    <a class="nav-link" href="examples">Examples</a>
+                    <a class="nav-link" href="documentation">Documentation</a>
+                </nav>
+                </div>
+            </header>
+        </div>
+
+        <div class="mainContainer">
+            <h1>Documentation</h1>
+            <div class="exampleContainer">
+                <h3>Getting Started</h3>
+                <ul>
+                    <li>Include the sportTrak_styles.css file in your html page</li>
+                    <li>Include the sportTrak.js file in your html page</li>
+                    <li>Get the data for the sports game.</li>
+                    <li>Create a new sportTraker and pass the data into it.</li>
+                    <pre>
+                        <code>
+                            const sportTracker = new sportTraker(soccerData);
+                        </code>
+                    </pre>
+                    <li>You are all set up! Now you can call these functions on your new sportTraker object!</li>
+                </ul>
+            </div>
+
+            <div class="exampleContainer">
+                <h3>Data Configuration</h3>
+                <p>It is important you configure your game data in this way!
+                </p>
+                <div class="tab">
+                    <button class="tablink" onclick="openTab(event, 'DATA', 1)">DATA</button>
+                    <div class="DATA tabcontent">
+                        <pre>
+                            <code>
+                                const soccerData = {
+                                    sport: 'soccer',
+                                    team1: 'FC Bayern Munich',
+                                    team2: 'Borussia Dortmund',
+                                    team1color: 'red',
+                                    team2color: 'yellow',
+                                    team1starters: {
+                                        gk: {
+                                            name: 'Manuel Neuer',
+                                            number: 1
+                                        },
+                                        cb1: {
+                                            name: 'Dayot Upamecano',
+                                            number: 2
+                                        },
+                                        cb2: {
+                                            name: 'Niklas Sule',
+                                            number: 4
+                                        },
+                                        rb: {
+                                            name: 'Benjamin Pavard',
+                                            number: 5
+                                        },
+                                        lb: {
+                                            name: 'Alphonso Davies',
+                                            number: 19
+                                        },
+                                        cdm1: {
+                                            name: 'Joshua Kimmich',
+                                            number: 6
+                                        },
+                                        cdm2: {
+                                            name: 'Leon Goretzka',
+                                            number: 8
+                                        },
+                                        rm: {
+                                            name: 'Serge Gnabry',
+                                            number: 7
+                                        },
+                                        lm: {
+                                            name: 'Leroy Sane',
+                                            number: 10
+                                        },
+                                        cam: {
+                                            name: 'Thomas Muller',
+                                            number: 25
+                                        },
+                                        st: {
+                                            name: 'Robert Lewandowski',
+                                            number: 9
+                                        }
+                                    },
+                                    team2starters: {
+                                        gk: {
+                                            name: 'Gregor Kobel',
+                                            number: 1
+                                        },
+                                        cb1: {
+                                            name: 'Manuel Akanji',
+                                            number: 16
+                                        },
+                                        cb2: {
+                                            name: 'Mats Hummels',
+                                            number: 15
+                                        },
+                                        rb: {
+                                            name: 'Thomas Meunier',
+                                            number: 24
+                                        },
+                                        lb: {
+                                            name: 'Raphael Guerreiro',
+                                            number: 13
+                                        },
+                                        cdm: {
+                                            name: 'Emre Can',
+                                            number: 23
+                                        },
+                                        cam: {
+                                            name: 'Mahmoud Dahoud',
+                                            number: 8
+                                        },
+                                        rm: {
+                                            name: 'Jude Bellingham',
+                                            number: 22
+                                        },
+                                        lm: {
+                                            name: 'Julian Brandt',
+                                            number: 19
+                                        },
+                                        st1: {
+                                            name: 'Erling Haaland',
+                                            number: 9
+                                        },
+                                        st2: {
+                                            name: 'Marco Reus',
+                                            number: 11
+                                        }
+                                    },
+                                    team1formation: '4-2-3-1',
+                                    team2formation: '4-1-3-2',
+                                    team1bench: [{name: 'Sven Ulreich', number: 26}, {name: 'Lucas Hernandez', number: 21}, {name: 'Bouna Sarr', number: 20}, {name: 'Jamal Musiala', number: 42}, {name: 'Corentin Tolisso', number: 24}, {name: 'Marcel Sabitzer', number: 18}, {name: 'Kingsley Coman', number: 11}],
+                                    team2bench: [{name: 'Roman Burki', number: 38}, {name: 'Dan-Axel Zagadou', number: 5}, {name: 'Giovanni Reyna', number: 7}, {name: 'Thorgan Hazard', number: 10}, {name: 'Axel Witsel', number: 28}, {name: 'Nico Schulz', number: 14}, {name: 'Donyell Malen', number: 21}],
+                                    team1stats: {
+                                        score: 3,
+                                        shots: 17,
+                                        shotsOnTarget: 6,
+                                        posession: '53%',
+                                        passes: 506,
+                                        passAcc: '80%',
+                                        fouls: 10,
+                                        yellow: 2,
+                                        red: 0,
+                                        offsides: 1,
+                                        corners: 6
+                                    },
+                                    team2stats: {
+                                        score: 2,
+                                        shots: 12,
+                                        shotsOnTarget: 4,
+                                        posession: '47%',
+                                        passes: 450,
+                                        passAcc: '77%',
+                                        fouls: 10,
+                                        yellow: 2,
+                                        red: 0,
+                                        offsides: 3,
+                                        corners: 4
+                                    },
+                                    team1PlayerStats: [
+                                        {name: 'Leon Goretzka', shots: 1, challengesWon: 4, fouls: 2},
+                                        {name: 'Robert Lewandowski', goals: 2, shots: 2, challengesWon: 8, fouls: 1, yellowCard: 1}, 
+                                        {name: 'Thomas Muller', shots: 1, assists: 1, challengesWon: 2}, 
+                                        {name: 'Kingsley Coman', goals: 1, shots: 3, challengesWon: 1},
+                                        {name: 'Dayot Upamecano', shots: 1, challengesWon: 6, fouls: 2, yellowCard: 1},
+                                        {name: 'Benjamin Pavard', shots: 2, challengesWon: 5},
+                                        {name: 'Leroy Sane', shots: 1, challengesWon: 2}, 
+                                        {name: 'Corentin Tolisso', shots: 1, challengesWon: 5}, 
+                                        {name: 'Manuel Neuer', saves: 10}, 
+                                        {name: 'Alphonso Davies', shots: 1, challengesWon: 5}, 
+                                        {name: 'Niklas Sule', challengesWon: 4, fouls: 2}, 
+                                        {name: 'Serge Gnabry', shots: 2}, 
+                                        {name: 'Jamal Musiala', shots: 1, challengesWon: 1},
+                                        {name: 'Joshua Kimmich', challengesWon: 7}  
+                                    ],
+                                    team2PlayerStats: [
+                                        {name: 'Manuel Akanji', challengesWon: 4, fouls: 1},
+                                        {name: 'Jude Bellingham', shots: 2, assists: 2, challengesWon: 10, fouls: 2, yellowCard: 1}, 
+                                        {name: 'Erling Haaland', goals: 1, shots: 1, challengesWon: 2, fouls: 2}, 
+                                        {name: 'Julian Brandt', goals: 1, shots: 1, challengesWon: 2},
+                                        {name: 'Emre Can', shots: 1, challengesWon: 6, fouls: 2, yellowCard: 1},
+                                        {name: 'Raphael Guerreiro', shots: 2, challengesWon: 5},
+                                        {name: 'Mats Hummels', shots: 1, challengesWon: 6, fouls: 1}, 
+                                        {name: 'Thomas Meunier', shots: 1, challengesWon: 5}, 
+                                        {name: 'Gregor Kobel', saves: 3}, 
+                                        {name: 'Marco Reus', shots: 1, challengesWon: 5}, 
+                                        {name: 'Mahmoud Dahoud', challengesWon: 4, fouls: 2}, 
+                                        {name: 'Nico Schulz', challengesWon: 2}, 
+                                        {name: 'Donyell Malen', shots: 2, challengesWon: 1}
+                                    ],
+                                    highlights: [
+                                        {
+                                            currScore: '2 - 2',
+                                            time: '78',
+                                            play: "Lewandowski scores penalty"
+                                        },
+                                        {
+                                            currScore: '1 - 0',
+                                            time: '45',
+                                            play: "Bellingham corner, Haaland scores"
+                                        },
+                                        {
+                                            currScore: '1 - 1',
+                                            time: '55',
+                                            play: "Gnabry cross to Lewandowski, Lewandowski scores"
+                                        },
+                                    ]
+                                }
+                            </code>
+                        </pre>
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="exampleContainer">
+                <h3>User Methods</h3>
+                <code>SportTracker.makeCourt(scale)</code>
+                <ul>
+                    <li>Creates a court/field of the respective sport.</li>
+                    <li>scale: is the scale you want the court/field to be scaled to.</li>
+                    <li>Return: returns a div which contains the whole court.</li>
+                    <li>Use return value to add the court to your page and position/stlye the court as you like.</li>
+                </ul>
+
+                <code>SportTracker.displayPlayers()</code>
+                <ul>
+                    <li>Displays the lineups for the game, with each player and their jersey number</li>
+                    <li>Also allows you to click on each player to view their stats</li>
+                    <li>Return: returns two divs which contain the players on the bench.</li>
+                    <li>Use the return value to decide if you want to display the benches of each team.</li>
+                    <li>Position the benches as you wish</li>
+                </ul>
+
+                <code>SportTracker.showStats()</code>
+                <ul>
+                    <li>Creates a table with the game stats from the game.</li>
+                    <li>Return: returns a div which contains the whole table.</li>
+                    <li>Use return value to add the stats table to your page and position the table as you wish.</li>
+                </ul>
+
+                <code>SportTracker.playAnimation(num)</code>
+                <ul>
+                    <li>Plays the animation from the list of highlights.</li>
+                    <li>num: The animation number you wish to play from the list of highlights</li>
+                    <li>Return: NA</li>
+                </ul>
+                
+            </div>
+            
+        </div>
+    </body>
+</html>

@@ -274,35 +274,24 @@ const soccerData = {
     highlights: [
         {
             currScore: '2 - 2',
-            // play: "Lewandowski scores penalty"
-            play: "Gnabry cross to Sane, Sane scores"
-        },
-        {
-            currScore: '0 - 0',
-            play: "Muller through pass to Lewandowski, Lewandowski scores"
+            time: '78',
+            play: "Lewandowski scores penalty"
         },
         {
             currScore: '1 - 0',
+            time: '45',
             play: "Bellingham corner, Haaland scores"
         },
         {
             currScore: '1 - 1',
-            play: "Coman dribbles, Coman scores"
+            time: '55',
+            play: "Gnabry cross to Lewandowski, Lewandowski scores"
         },
-        {
-            currScore: '2 - 1',
-            play: "Upamecano tackles Haaland, Upamecano yellow card"
-        }
     ]
 }
 
-const sportTracker = new sportTraker(soccerData)
-
-function showLineup() {
-    clearPage();
-    sportTracker.makeCourt(1.5)
-    sportTracker.displayPlayers();
-}
+const soccerSportTracker = new sportTraker(soccerData);
+// const basketballSportTracker = new sportTracker(basketballData)
 
 function showStats() {
     clearPage();
@@ -326,20 +315,87 @@ function clearPage() {
     
 }
 
+const example1 = document.getElementById('example1');
+const example2 = document.getElementById('example2');
+const example3 = document.getElementById('example3');
+
 function showHighlight(num) {
-    // sportTracker.playAnimation(num);
-    // sportTracker.spawnBall()
+    let court = document.getElementsByClassName('courtWrapper')[1];
+    let b1 = document.getElementsByClassName('team1bench')[1];
+    let b2 = document.getElementsByClassName('team2bench')[1];
+    example3.removeChild(court)
+    example3.removeChild(b1)
+    example3.removeChild(b2)
 
-    for (let i = 0; i < 10; i++) {
-        setTimeout(function() {
-            test(i)
-        }, 3000)
-        
+    let field2 = soccerSportTracker.makeCourt(1.5)
+    let benches = soccerSportTracker.displayPlayers();
+    let bench12 = benches[0]
+    let bench22 = benches[1]
+
+    example3.appendChild(field2);
+    example3.appendChild(bench12);
+    example3.appendChild(bench22);
+
+    soccerSportTracker.playAnimation(num);
+}   
+
+
+
+function showExamples() {
+    clearPage();
+    let field1 = soccerSportTracker.makeCourt(1.5)
+    let benches = soccerSportTracker.displayPlayers();
+    let bench1 = benches[0]
+    let bench2 = benches[1]
+
+    example1.appendChild(field1);
+    example1.appendChild(bench1);
+    example1.appendChild(bench2);
+
+    let statTable = soccerSportTracker.showStats();
+    example2.appendChild(statTable);
+
+    let field2 = soccerSportTracker.makeCourt(1.5)
+    benches = soccerSportTracker.displayPlayers();
+    let bench12 = benches[0]
+    let bench22 = benches[1]
+
+    example3.appendChild(field2);
+    example3.appendChild(bench12);
+    example3.appendChild(bench22);
+
+
+}
+
+function openTab(evt, tab, exampleNum) {
+    let tabContent = document.getElementsByClassName(tab)[exampleNum - 1];
+    let allTabs = document.getElementsByClassName('tabcontent')
+
+    for (let i = 0; i < allTabs.length; i++) {
+        allTabs[i].style.display = "none";
     }
+    
+    let tablinks = document.getElementsByClassName("tablink");
+    let hide = true;
+    
+    if (evt.currentTarget.className.includes("active") === false) {
+        hide = false;
+    }
+
+    for (let i = 0; i < tablinks.length; i++) {
+        tablinks[i].className = tablinks[i].className.replace(" active", "");
+    }
+
+    if (hide === false) {
+        tabContent.style.display = "block";
+        evt.currentTarget.className += " active";
+    }
+
+    
+
 }
 
-function test(i) {
-    setTimeout(function() {
-        log(i)
-    }, 2000)
-}
+
+
+showExamples();
+
